@@ -6,5 +6,85 @@
 		
 	</head>
 	<body>
-	</body>
+		<section id="main">
+			saved key:<input id="textkey" type="text" />
+			saved value:<input id="textdata" type="text" />
+			<button id="button" onclick="setsessionStorage()">save</button>
+			<button id="button" onclick="removeStorage()">delete</button>
+			<button id="button" onclick="removeallStorage()">delete all</button>
+			<table border="1">
+				<tr>
+					<th>key</th><th>value</th>
+				</tr>
+				<tbody id="list">
+				</tbody>
+			</table>
+		</section>
+		<script type="text/javascript">
+			if(typeof sessionStorage === "undefined")
+			{
+				window.alart("This enviroments can't use Web Storage.");
+			}
+			else
+			{
+				var storage=settionStorage;
+				
+				//settionStorageへ格納します
+				function setSessionStorage()
+				{
+					var key=document.getElementById("textkey").value;
+					var value=document.getElementById("textdata").value;
+					
+					//値の入力をチェック
+					if(key && value)
+					{
+						storage.setItem(key,value);
+					}
+					
+					key="";
+					value="";
+					
+					viewStorage();						
+				}
+	
+			//settionStorageからデータの取得と表示
+			function viewStorage()
+				{
+					var list=document.getElementById("list")
+					while(list.firstChild) list.removeChild(list.firstChild);
+					
+					//全セッションの情報の取得
+					for(var i=0;i<storage.length;i++)
+					{
+						var _key=storage.key(i);
+						
+						//settionStorageのすべてのkeyとvalueの表示
+						var tr=document.createElement("tr");
+						var td1=document.createElement("td");
+						var td2=document.createElement("td");
+						list.appendChild(tr);
+						tr.appendChild(td1);
+						tr.appendChild(td2);
+						td1.innerHTML=_key;
+						td2.innerHTML=storage.getItem(_key);
+					}
+				}
+				//settionStorageから削除
+				function removeStorage()
+				{
+					var key=document.getElementById("textkey").value;
+					storage.removeItem(key);
+					key="";
+					viewStorage();
+				}
+				
+				//settionStorageからすべてを削除
+				function remobeallStorage()
+				{
+					storage.clear();
+					viewStorage();
+				}
+			}
+		</script>
+</body>
 </html>

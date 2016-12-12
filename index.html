@@ -27,9 +27,9 @@
 			}
 			else
 			{
-				var storage=settionStorage;
+				var storage=sessionStorage;
 				
-				//settionStorageへ格納します
+				//sessionStorageへ格納します
 				function setSessionStorage()
 				{
 					var key=document.getElementById("textkey").value;
@@ -47,7 +47,8 @@
 					viewStorage();						
 				}
 	
-			//settionStorageからデータの取得と表示
+			//
+				Storageからデータの取得と表示
 			function viewStorage()
 				{
 					var list=document.getElementById("list")
@@ -58,7 +59,7 @@
 					{
 						var _key=storage.key(i);
 						
-						//settionStorageのすべてのkeyとvalueの表示
+						//sessionStorageのすべてのkeyとvalueの表示
 						var tr=document.createElement("tr");
 						var td1=document.createElement("td");
 						var td2=document.createElement("td");
@@ -69,7 +70,7 @@
 						td2.innerHTML=storage.getItem(_key);
 					}
 				}
-				//settionStorageから削除
+				//sessionStorageから削除
 				function removeStorage()
 				{
 					var key=document.getElementById("textkey").value;
@@ -78,7 +79,7 @@
 					viewStorage();
 				}
 				
-				//settionStorageからすべてを削除
+				//sessionStorageからすべてを削除
 				function remobeallStorage()
 				{
 					storage.clear();
